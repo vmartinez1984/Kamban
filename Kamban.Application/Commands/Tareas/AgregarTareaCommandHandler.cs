@@ -18,6 +18,8 @@ namespace Kamban.Application.Commands.Tareas
             Tarea tarea;
             string id;
 
+            if (string.IsNullOrEmpty(request.EncodedKey))
+                request.EncodedKey = Guid.NewGuid().ToString();
             tarea = _mapper.Map<Tarea>(request);
             tarea.Estado = "Enchilame esta";
             id = await _tareaRepository.Agregar(tarea);

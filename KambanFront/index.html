@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="cargarPagina()">
+    <div>
+        <div>
+            <label>Nombre</label>
+            <input type="text" id="nombre" />
+        </div>
+        <div>
+            <label>Descripción</label>
+            <input type="text" id="descripcion" />
+        </div>
+        <div>
+            <label>Estado</label>
+            <select>
+                <option selected>Enchilame esta</option>
+            </select>
+        </div>
+        <div>
+            <label>Fecha inicial</label>
+            <input type="date" id="fechaInicial" />
+        </div>
+        <div>
+            <label>Fecha final</label>
+            <input type="date" id="fechaFinal" />
+        </div>
+        <div>
+            <label>Tiempo estimado</label>
+            <input type="number" id="tiempoEstimado" />
+        </div>
+        <!-- <div>
+        <label>Tiempo consumido</label>
+        <input type="number" id="tiempoConsumido" />
+    </div> -->
+        <div>
+            <button type="button" onclick="guardarTarea()"> Guardar</button>
+        </div>
+    </div>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Descripción</th>
+                <th>Fecha inicial</th>
+                <th>Fecha final</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <script>
+        const baseUrl = "https://localhost:7108/api/"
+
+        async function obtenerTareas() {
+            const response = await fetch(baseUrl + "tareas")
+            if (response.ok) {
+                return response.json()
+            }
+        }
+
+        async function agregarTareaAsync(tarea) {            
+            const myHeaders = new Headers();
+            myHeaders.append("accept", "*/*");
+            myHeaders.append("Content-Type", "application/json");
+            const raw = JSON.stringify(tarea)
+            const requestOptions = {
+                method: "POST",
+                body: raw,
+                headers: myHeaders
+            }
+            const response = await fetch(baseUrl + "Tareas", requestOptions)
+            console.log(response)
+            if (response.ok) {
+                return response.json()
+            } else {
+                const errorData = await response.json(); // Obtenemos el cuerpo del error en formato JSON
+                console.log("Error:", errorData); // Mostramos el error en consola
+                throw new Error("Error en la solicitud: " + JSON.stringify(errorData));
+            }
+        }
+
+        async function obtenerTareaPorId(tareaId) {
+            const response = await fetch(baseUrl + "tareas/"+ tareaId)
+            if (response.ok) {
+                return response.json()
+            }
+        }
+    </script>
+    <script>
+        //const baseUrl = "https://localhost:7108/api/"
+        var tareas;
+
+        async function cargarPagina() {
+            tareas = await obtenerTareas()
+            console.log(tareas)
+            pintarTareas(tareas)
+        }
+
+        function pintarTareas(tareas) {
+            let tbody = document.getElementById('tbody')
+            tbody.innerHTML= ''
+            for (let index = 0; index < tareas.length; index++) {
+                const tarea = tareas[index];
+                let tr = document.createElement('tr')
+                let td = null
+                td = document.createElement('td')
+                td.innerText = tarea.nombre
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = tarea.estado
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = tarea.descripcion
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = tarea.fechaInicial.substring(0, 10)
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = tarea.fechaFinal == null ? '' : tarea.fechaFinal.substring(0, 10)
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerHTML = '<a href="detalles.html?id=' + tarea.id + '">Ver detalles</a>'
+                tr.appendChild(td)
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerHTML = '<a href="editar.html?id=' + tarea.id + '">Editar</a>'
+                tr.appendChild(td)
+                tbody.appendChild(tr)
+            }
+        }
+
+        async function guardarTarea() {
+            const json = {
+                encodedKey: document.getElementById('nombre').value,
+                nombre: document.getElementById('nombre').value,
+                descripcion: document.getElementById('descripcion').value,
+                fechaInicial: document.getElementById('fechaInicial').value == '' ? null : document.getElementById('fechaInicial').value,
+                fechaFinal: document.getElementById('fechaFinal').value == '' ? null : document.getElementById('fechaFinal').value,
+                tiempoEstimado: parseInt(document.getElementById('tiempoEstimado').value),
+                //tiempoConsumido: document.getElementById('tiempoConsumido').value
+            }
+            const respuestaJson = await agregarTareaAsync(json)
+            console.log(respuestaJson)
+            tareas = await obtenerTareas()           
+            pintarTareas(tareas)           
+        }    
+    </script>
+</body>
+
+</html>

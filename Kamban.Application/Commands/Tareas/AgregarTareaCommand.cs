@@ -4,8 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Kamban.Application.Commands.Tareas
 {
     public class AgregarTareaCommand : IRequest<AgregarTareaCommandResponse>
-    {
-        [Required]
+    {        
         public string EncodedKey { get; set; }
 
         [Required]
@@ -13,9 +12,8 @@ namespace Kamban.Application.Commands.Tareas
 
         [Required]
         public string Descripcion { get; set; }
-
-        [Required]
-        public DateTime FechaInicial { get; set; }
+                
+        public DateTime? FechaInicial { get; set; } = null;
 
         public DateTime? FechaFinal { get; set; } = null;
 

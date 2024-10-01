@@ -19,7 +19,7 @@ namespace Kamban.Domain.Entities
 
         public string Descripcion { get; set; }
 
-        public DateTime FechaInicial { get; set; }
+        public DateTime? FechaInicial { get; set; } = null;
 
         public DateTime? FechaFinal { get; set; } = null;
 
