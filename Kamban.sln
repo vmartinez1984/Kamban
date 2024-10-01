@@ -29,6 +29,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "KambanFront", "KambanFront\
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "56169"
+		SlnRelativePath = "KambanFront\"
 	EndProjectSection
 EndProject
 Global
