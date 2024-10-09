@@ -32,6 +32,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "KambanFront", "KambanFront\
 		SlnRelativePath = "KambanFront\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kamban.Mvc", "Kamban.Mvc\Kamban.Mvc.csproj", "{3F1A624A-B355-41EA-81F2-6314B15B18A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{B92CAF76-FBF0-4DB0-B60E-3EEFCB17FC12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B92CAF76-FBF0-4DB0-B60E-3EEFCB17FC12}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{B92CAF76-FBF0-4DB0-B60E-3EEFCB17FC12}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3F1A624A-B355-41EA-81F2-6314B15B18A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F1A624A-B355-41EA-81F2-6314B15B18A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F1A624A-B355-41EA-81F2-6314B15B18A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F1A624A-B355-41EA-81F2-6314B15B18A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

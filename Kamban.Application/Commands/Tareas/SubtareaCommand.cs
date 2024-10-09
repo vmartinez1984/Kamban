@@ -15,9 +15,10 @@ namespace Kamban.Application.Commands.Tareas
         [Required]
         public string Descripcion { get; set; }
 
-        [Required]
-        public DateTime FechaInicial { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? FechaInicial { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? FechaFinal { get; set; } = null;
 
         public int TiempoEstimado { get; set; } = 0;
@@ -25,5 +26,8 @@ namespace Kamban.Application.Commands.Tareas
         public int TiempoConsumido { get; set; } = 0;
 
         public List<BitacoraCommand> Bitacora { get; set; } = new List<BitacoraCommand>();
+
+        [DataType(DataType.Date)]
+        public DateTime FechaDeRegistro { get; set; }
     }
 }

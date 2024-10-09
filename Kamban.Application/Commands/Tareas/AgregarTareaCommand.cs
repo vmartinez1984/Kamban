@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Kamban.Application.Commands.Tareas
@@ -7,18 +8,29 @@ namespace Kamban.Application.Commands.Tareas
     {        
         public string EncodedKey { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El Nombre es requerido")]
+        [MaxLength(28)]
         public string Nombre { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La Descripción es requerida")]
+        [DisplayName("Descripción")]
+        [MaxLength(250)]
         public string Descripcion { get; set; }
-                
+
+        [DisplayName("Fecha inicial")]
+        [DataType(DataType.Date)]
         public DateTime? FechaInicial { get; set; } = null;
 
+        [DisplayName("Fecha final")]
+        [DataType(DataType.Date)]
         public DateTime? FechaFinal { get; set; } = null;
 
-        public int TiempoEstimado { get; set; } = 0;
+        [DisplayName("Tiempo estimado")]
+        [Range(0,24)]
+        public int? TiempoEstimado { get; set; } = null;
 
-        public int TiempoConsumido { get; set; } = 0;
+        [DisplayName("Tiempo consumido")]
+        [Range(0, 24)]
+        public int? TiempoConsumido { get; set; } = null;
     }
 }

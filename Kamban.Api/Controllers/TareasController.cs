@@ -54,7 +54,6 @@ namespace Kamban.Api.Controllers
             return Created(string.Empty, response);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> ObtenerTodos(IMediator mediator)
         {

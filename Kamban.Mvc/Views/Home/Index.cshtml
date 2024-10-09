@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Kamban.Application.Commands.Tareas.ObtenerTareaCommandResponse>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AgregarTarea">Agregar tareas</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFinal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDeRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TiempoEstimado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TiempoConsumido)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaInicial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFinal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDeRegistro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TiempoEstimado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TiempoConsumido)
+                </td>
+                <td>                    
+                    <a href="/Home/EditarTarea/@item.Id">Editar</a> |
+                    <a href="/Home/EditarTarea/@item.Id">Finalizar</a>  |
+                    <a href="/Home/EditarTarea/@item.Id">Pausa</a>  |                    
+                    @Html.ActionLink("Detalles", "Detalles", new {  id=item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
