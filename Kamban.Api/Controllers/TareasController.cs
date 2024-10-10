@@ -1,4 +1,5 @@
 ﻿using Kamban.Application.Commands.BitacoraDeTareas;
+using Kamban.Application.Commands.Estados;
 using Kamban.Application.Commands.Subtareas;
 using Kamban.Application.Commands.Tareas;
 using MediatR;
@@ -99,11 +100,11 @@ namespace Kamban.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class EstadosController : ControllerBase
-    {
+    {        
         [HttpGet()]
-        public  IActionResult ObtenerEstados()
+        public  IActionResult ObtenerEstados(IMediator mediator)
         {
-            return Ok(new List<string> { "Enchilame esta", "En chinga", "Ya chingamos" });
+            return Ok(mediator.Send(new GetEstadosCommand { }));
         }
     }
 }

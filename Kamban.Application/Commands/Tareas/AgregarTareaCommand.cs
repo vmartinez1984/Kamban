@@ -9,10 +9,9 @@ namespace Kamban.Application.Commands.Tareas
         public string EncodedKey { get; set; }
 
         [Required(ErrorMessage = "El Nombre es requerido")]
-        [MaxLength(28)]
+        [MaxLength(64)]
         public string Nombre { get; set; }
-
-        [Required(ErrorMessage = "La Descripción es requerida")]
+                
         [DisplayName("Descripción")]
         [MaxLength(250)]
         public string Descripcion { get; set; }

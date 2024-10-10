@@ -4,19 +4,13 @@
     ViewData["Title"] = "AgregarTarea";
 }
 
-<h1>AgregarTarea</h1>
+<h1>Agregar Tarea</h1>
 
-<h4>AgregarTareaCommand</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <form asp-action="AgregarTarea">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="EncodedKey" class="control-label"></label>
-                <input asp-for="EncodedKey" class="form-control" />
-                <span asp-validation-for="EncodedKey" class="text-danger"></span>
-            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -47,7 +41,7 @@
                 <input asp-for="TiempoConsumido" class="form-control" />
                 <span asp-validation-for="TiempoConsumido" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>

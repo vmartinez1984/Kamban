@@ -1,8 +1,10 @@
 using Kamban.Application.Commands.BitacoraDeTareas;
+using Kamban.Application.Commands.Estados;
 using Kamban.Application.Commands.Tareas;
 using Kamban.Mvc.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 
 namespace Kamban.Mvc.Controllers
@@ -40,20 +42,42 @@ namespace Kamban.Mvc.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult AgregarSubtarea(int id)
+        public IActionResult AgregarSubtarea(int tareaId)
         {
-            ViewBag["tareaId"] = id;
+            ViewBag["tareaId"] = tareaId;
 
             return View();
         }
-                
+
         public async Task<IActionResult> EditarTarea(int id)
         {
             ObtenerTareaPorIdCommandResponse response;
 
             response = await _mediator.Send(new ObtenerTareaPorIdCommand { IdEncodedKey = id.ToString() });
-            
+            ViewBag.Estados = (await _mediator.Send(new GetEstadosCommand())).Select(x => new SelectListItem
+            {
+                Text = x.Nombre,
+                Value = x.Nombre
+            });
+
             return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarTarea(ObtenerTareaCommandResponse commandResponse)
+        {
+            await _mediator.Send(new ActualizarTareaCommand
+            {
+                Descripcion = commandResponse.Descripcion,
+                Estado = commandResponse.Estado,
+                FechaFinal = commandResponse.FechaFinal,
+                FechaInicial = commandResponse.FechaInicial,
+                Nombre = commandResponse.Nombre,
+                TareaIdEncodedKey = commandResponse.Id.ToString(),
+                TiempoConsumido = commandResponse.TiempoConsumido,
+                TiempoEstimado = commandResponse.TiempoEstimado
+            });
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Detalles(int id)

@@ -4,12 +4,11 @@
     ViewData["Title"] = "Agregar Bitacora";
 }
 
-<h1>AgregarBitacora</h1>
+<h1>Agregar Bitacora</h1>
 
-<h4>AgregarBitacoraCommand</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="AgregarBitacora">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
               
@@ -20,7 +19,7 @@
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
@@ -28,6 +27,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar a la lista</a>
 </div>
 

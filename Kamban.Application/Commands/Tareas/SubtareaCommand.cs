@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Kamban.Application.Commands.Tareas
 {
@@ -15,18 +16,23 @@ namespace Kamban.Application.Commands.Tareas
         [Required]
         public string Descripcion { get; set; }
 
+        [DisplayName("Inicial")]
         [DataType(DataType.Date)]
         public DateTime? FechaInicial { get; set; }
 
+        [DisplayName("Final")]
         [DataType(DataType.Date)]
         public DateTime? FechaFinal { get; set; } = null;
 
+        [DisplayName("Estimado")]
         public int TiempoEstimado { get; set; } = 0;
 
+        [DisplayName("Consumido")]
         public int TiempoConsumido { get; set; } = 0;
 
         public List<BitacoraCommand> Bitacora { get; set; } = new List<BitacoraCommand>();
 
+        [DisplayName("Fecha de registro")]
         [DataType(DataType.Date)]
         public DateTime FechaDeRegistro { get; set; }
     }

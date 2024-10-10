@@ -17,9 +17,8 @@ namespace Kamban.Application.Commands.Tareas
 
         [Required]
         public string Descripcion { get; set; }
-
-        [Required]
-        public DateTime FechaInicial { get; set; }
+                
+        public DateTime? FechaInicial { get; set; }
 
         public DateTime? FechaFinal { get; set; } = null;
 

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de tareas</h1>
 
 <p>
     <a asp-action="AgregarTarea">Agregar tareas</a>
@@ -73,10 +73,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TiempoConsumido)
                 </td>
-                <td>                    
+                <td>
+                    <a href="/Home/AgregarBitacora?tareaId=@item.Id">Agregar Bitacora</a> |
                     <a href="/Home/EditarTarea/@item.Id">Editar</a> |
-                    <a href="/Home/EditarTarea/@item.Id">Finalizar</a>  |
-                    <a href="/Home/EditarTarea/@item.Id">Pausa</a>  |                    
+                    @* <a href="/Home/EditarTarea/@item.Id">Finalizar</a>  |
+                    <a href="/Home/EditarTarea/@item.Id">Pausa</a>  |  *@                   
                     @Html.ActionLink("Detalles", "Detalles", new {  id=item.Id })
                 </td>
             </tr>
