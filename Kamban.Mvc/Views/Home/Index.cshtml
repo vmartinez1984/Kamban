@@ -24,21 +24,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
-            <th>
+          @*   <th>
                 @Html.DisplayNameFor(model => model.FechaInicial)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaFinal)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.FechaDeRegistro)
             </th>
-            <th>
+           @*  <th>
                 @Html.DisplayNameFor(model => model.TiempoEstimado)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TiempoConsumido)
-            </th>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -58,21 +58,21 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
-                <td>
+               @*  <td>
                     @Html.DisplayFor(modelItem => item.FechaInicial)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaFinal)
-                </td>
+                </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaDeRegistro)
                 </td>
-                <td>
+               @*  <td>
                     @Html.DisplayFor(modelItem => item.TiempoEstimado)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TiempoConsumido)
-                </td>
+                </td> *@
                 <td>
                     <a href="/Home/AgregarBitacora?tareaId=@item.Id">Agregar Bitacora</a> |
                     <a href="/Home/EditarTarea/@item.Id">Editar</a> |

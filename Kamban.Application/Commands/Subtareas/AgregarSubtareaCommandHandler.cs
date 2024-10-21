@@ -19,7 +19,7 @@ namespace Kamban.Application.Commands.Subtareas
             Subtarea subtarea;
 
             tarea = await _tareaRepository.ObtenerPorIdAsync(request.TareaIdEncodedkey);
-            subtarea = _mapper.Map<Subtarea>(request);
+            subtarea = _mapper.Map<Subtarea>(request);            
             tarea.Subtareas.Add(subtarea);
             await _tareaRepository.ActualizarAsync(tarea);
 

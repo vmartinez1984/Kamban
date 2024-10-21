@@ -1,0 +1,72 @@
+﻿@model Kamban.Application.Commands.Tareas.SubtareaCommand
+
+@{
+    ViewData["Title"] = "EditarSubtarea";
+}
+
+<h1>EditarSubtarea</h1>
+
+<h4>SubtareaCommand</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Editar" asp-route-tareaId="@ViewData["tareaId"]">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
+
+                <input asp-for="EncodedKey" type="hidden" />
+            @* <input asp-for="TareaIdEncodedKey" type="hidden" value="@ViewData["tareaId"]" /> *@
+
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <select asp-for="Estado" class="form-select" asp-items="ViewBag.Estados"></select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaInicial" class="control-label"></label>
+                <input asp-for="FechaInicial" class="form-control" />
+                <span asp-validation-for="FechaInicial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaFinal" class="control-label"></label>
+                <input asp-for="FechaFinal" class="form-control" />
+                <span asp-validation-for="FechaFinal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TiempoEstimado" class="control-label"></label>
+                <input asp-for="TiempoEstimado" class="form-control" />
+                <span asp-validation-for="TiempoEstimado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TiempoConsumido" class="control-label"></label>
+                <input asp-for="TiempoConsumido" class="form-control" />
+                <span asp-validation-for="TiempoConsumido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDeRegistro" class="control-label"></label>
+                <input asp-for="FechaDeRegistro" class="form-control" disabled/>
+                <span asp-validation-for="FechaDeRegistro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

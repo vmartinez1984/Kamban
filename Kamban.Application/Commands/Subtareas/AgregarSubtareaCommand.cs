@@ -13,23 +13,27 @@ namespace Kamban.Application.Commands.Subtareas
         [DefaultValue("")]
         public string EncodedKey { get; set; } = Guid.NewGuid().ToString();
 
-        [Required]
-        public string Estado { get; set; }
+        public string Estado { get; set; } = "Enchilame esta";
 
-        [Required]
+        [Required(ErrorMessage = "El nombre es requerido")]
         public string Nombre { get; set; }
 
-        [Required]
+        [DisplayName("Descripción")]
         public string Descripcion { get; set; }
 
-        [Required]
-        public DateTime FechaInicial { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("Fecha incial")]
+        public DateTime? FechaInicial { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayName("Fecha final")]
         public DateTime? FechaFinal { get; set; } = null;
-                
-        public int TiempoEstimado { get; set; } = 0;
 
-        public int TiempoConsumido { get; set; } = 0;
+        [DisplayName("Tiempo estimado")]
+        public int? TiempoEstimado { get; set; } = 0;
+
+        [DisplayName("Tiempo consumido")]
+        public int? TiempoConsumido { get; set; } = 0;
         
     }
 }

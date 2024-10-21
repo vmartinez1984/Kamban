@@ -42,13 +42,6 @@ namespace Kamban.Mvc.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult AgregarSubtarea(int tareaId)
-        {
-            ViewBag["tareaId"] = tareaId;
-
-            return View();
-        }
-
         public async Task<IActionResult> EditarTarea(int id)
         {
             ObtenerTareaPorIdCommandResponse response;
