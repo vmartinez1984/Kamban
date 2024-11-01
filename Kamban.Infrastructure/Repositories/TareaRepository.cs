@@ -62,5 +62,12 @@ namespace Kamban.Infrastructure.Repositories
             //(await _collection.FindAsync(x => x.Estado != "Inactivo")).ToList();
             (await _collection.FindAsync(_ => true)).ToList();
 
+        public async Task<List<Tarea>> ObtenerTodosAsync(string estado = null)
+        {
+            if (string.IsNullOrEmpty(estado))
+                return (await _collection.FindAsync(_ => true)).ToList();
+            else
+                return (await _collection.FindAsync(x => x.Estado == estado)).ToList();
+        }
     }
 }

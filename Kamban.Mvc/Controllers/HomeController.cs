@@ -12,6 +12,10 @@ namespace Kamban.Mvc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        /// <summary>
+        /// Acceso a las reglas de negocio
+        /// </summary>
         private readonly IMediator _mediator;
 
         public HomeController(ILogger<HomeController> logger, IMediator mediator)
@@ -20,11 +24,19 @@ namespace Kamban.Mvc.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string estado)
         {
             List<ObtenerTareaCommandResponse> response;
+            List<GetEstadosCommandResponse> estados;
 
-            response = await _mediator.Send(new ObtenerTareaCommand());
+            response = await _mediator.Send(new ObtenerTareaCommand { Estado = estado});
+            estados = await _mediator.Send(new GetEstadosCommand());
+            //estados.Insert(0, new GetEstadosCommandResponse { Id = string.Empty, Nombre = "" });
+            ViewBag.Estados = estados.Select(x => new SelectListItem
+            {
+                Text = x.Nombre,
+                Value = x.Nombre
+            });
 
             return View(response);
         }

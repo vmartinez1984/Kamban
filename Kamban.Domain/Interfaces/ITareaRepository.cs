@@ -7,6 +7,6 @@ namespace Kamban.Domain.Interfaces
         Task ActualizarAsync(Tarea tarea);
         Task<string> Agregar(Tarea item);
         Task<Tarea> ObtenerPorIdAsync(string idGuid);
-        Task<List<Tarea>> ObtenerTodosAsync();
+        Task<List<Tarea>> ObtenerTodosAsync(string estado);
     }
 }

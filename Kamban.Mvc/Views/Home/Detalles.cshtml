@@ -79,7 +79,7 @@
             @Html.DisplayNameFor(model => model.Subtareas)
         </dt>
         <dd class="col-sm-10">
-            @await Html.PartialAsync("_Subtareas", Model.Subtareas.OrderByDescending(x => x.FechaDeRegistro))
+            @await Html.PartialAsync("_Subtareas", Model.Subtareas.OrderByDescending(x => x.Estado))
         </dd>
     </dl>
 

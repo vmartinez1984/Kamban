@@ -18,8 +18,8 @@ namespace Kamban.Application.Commands.Tareas
             List<ObtenerTareaCommandResponse> response;
             List<Tarea> tareas;
 
-            tareas = await _tareaRepository.ObtenerTodosAsync();
-            response = _mapper.Map<List<ObtenerTareaCommandResponse>>(tareas);
+            tareas = await _tareaRepository.ObtenerTodosAsync(request.Estado);
+            response = _mapper.Map<List<ObtenerTareaCommandResponse>>(tareas);            
 
             return response;
         }

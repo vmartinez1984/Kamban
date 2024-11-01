@@ -9,11 +9,17 @@
 <p>
     <a asp-action="AgregarTarea">Agregar tareas</a>
 </p>
+<div>
+    <label class="form-label"></label>
+    <select class="form-select" asp-items="ViewBag.Estados" onchange="filtrar()" id="selectEstado">
+        <option value="">Todos</option>
+    </select>
+</div>
 <table class="table">
     <thead>
         <tr>
             @* <th>
-                @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.Id)
             </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Estado)
@@ -24,20 +30,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
-          @*   <th>
-                @Html.DisplayNameFor(model => model.FechaInicial)
+            @*   <th>
+            @Html.DisplayNameFor(model => model.FechaInicial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaFinal)
+            @Html.DisplayNameFor(model => model.FechaFinal)
             </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.FechaDeRegistro)
             </th>
-           @*  <th>
-                @Html.DisplayNameFor(model => model.TiempoEstimado)
+            @*  <th>
+            @Html.DisplayNameFor(model => model.TiempoEstimado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TiempoConsumido)
+            @Html.DisplayNameFor(model => model.TiempoConsumido)
             </th> *@
             <th></th>
         </tr>
@@ -47,8 +53,8 @@
         {
             <tr>
                 @* <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td> *@
+            @Html.DisplayFor(modelItem => item.Id)
+            </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
@@ -58,29 +64,53 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
-               @*  <td>
-                    @Html.DisplayFor(modelItem => item.FechaInicial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaFinal)
-                </td> *@
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.FechaInicial)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.FechaFinal)
+            </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaDeRegistro)
                 </td>
-               @*  <td>
-                    @Html.DisplayFor(modelItem => item.TiempoEstimado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TiempoConsumido)
-                </td> *@
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.TiempoEstimado)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.TiempoConsumido)
+            </td> *@
                 <td>
                     <a href="/Home/AgregarBitacora?tareaId=@item.Id">Agregar Bitacora</a> |
                     <a href="/Home/EditarTarea/@item.Id">Editar</a> |
                     @* <a href="/Home/EditarTarea/@item.Id">Finalizar</a>  |
-                    <a href="/Home/EditarTarea/@item.Id">Pausa</a>  |  *@                   
-                    @Html.ActionLink("Detalles", "Detalles", new {  id=item.Id })
+                <a href="/Home/EditarTarea/@item.Id">Pausa</a>  |  *@
+                    @Html.ActionLink("Detalles", "Detalles", new { id = item.Id })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        function filtrar() {
+            let estado = document.getElementById('selectEstado').value
+            window.location.href = "/?estado=" + estado
+        }
+
+        function seleccionarEstado() {
+            let params = new URLSearchParams(window.location.search);
+            let estado = params.get('estado'); // 'John'
+            console.log(estado)
+            if (estado == null)
+                document.getElementById('selectEstado').value = ""
+            else
+                document.getElementById('selectEstado').value = estado
+        }
+
+        window.addEventListener('load', (event) => {
+            console.log('The page has fully loaded');
+            seleccionarEstado()
+        });
+    </script>
+}
