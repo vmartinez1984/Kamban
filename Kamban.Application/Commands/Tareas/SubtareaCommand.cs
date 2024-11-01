@@ -12,8 +12,7 @@ namespace Kamban.Application.Commands.Tareas
 
         [Required]
         public string Nombre { get; set; }
-
-        [Required]
+                
         public string Descripcion { get; set; }
 
         [DisplayName("Inicial")]
