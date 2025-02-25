@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kamban.Maui.Pages.ListaDeTareasPage"
+             xmlns:vm="clr-namespace:Kamban.Maui.ModelViews"
+             Title="Lista de tareas">
+    <ContentPage.BindingContext>
+        <vm:ListaDeTareasModelView/>
+    </ContentPage.BindingContext>
+    <Grid Padding="20">
+        <Grid>
+            <StackLayout>
+                <SearchBar Text="{Binding TextoABuscar}" />
+                <Picker 
+                    ItemsSource="{Binding Estados}" 
+                    SelectedItem="{Binding EstadoSeleccionado, Mode=TwoWay}" 
+                    ItemDisplayBinding="{Binding Nombre}"
+                    Grid.Row="1"
+                />
+                <Button Text="Agregar tarea" Command="{Binding AgregarNuevaTareaCommand}" />
+
+                <CollectionView 
+                    ItemsSource="{Binding TareasFiltradas}"                        
+                    SelectionMode="Single"
+                    SelectionChangedCommand ="{Binding TareaSeleccionadaCommand}" 
+                    SelectedItem="{Binding TareaSeleccionada, Mode=TwoWay}"              
+                    VerticalOptions="FillAndExpand"
+                >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Gray" Padding="10" Margin="10">
+                                <StackLayout>
+                                    <Label Text="{Binding Id}"/>
+                                    <Label Text="{Binding Nombre}"/>
+                                    <Label Text="{Binding Descripcion}"/>
+                                    <Label Text="{Binding Estado}"/>
+                                    <FlexLayout>
+                                        <Label Text="{Binding FechaDeRegistro}"/>
+                                        <!--<Button Text="Editar" HeightRequest="45"/>-->
+                                    </FlexLayout>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </StackLayout>
+        </Grid>
+        <Grid>
+            <ActivityIndicator IsRunning="True" IsEnabled="True" IsVisible="{Binding EstaCargando}" HeightRequest="50" />
+        </Grid>
+    </Grid>
+</ContentPage>

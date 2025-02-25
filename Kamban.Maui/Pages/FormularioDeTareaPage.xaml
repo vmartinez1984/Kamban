@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kamban.Maui.ModelViews.FormularioDeTareaPage"
+             xmlns:vm="clr-namespace:Kamban.Maui.ModelViews"
+             Title="Tarea">
+    <ContentPage.BindingContext>
+        <vm:FormularioDeTareaModelView/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="0,10,0,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="20">
+        <Label Text="Nombre"/>
+        <Entry Placeholder="Nombre" Text="{Binding Tarea.Nombre}" IsEnabled="{Binding !EstaCargando}" />
+
+        <Label Text="Descripción" />
+        <Entry 
+            Placeholder="Descripción" 
+            Text="{Binding Tarea.Descripcion}" 
+            IsEnabled="{Binding !EstaCargando}"            
+        />
+
+        <Label Text="Fecha inicial"/>
+        <DatePicker Date="{Binding Tarea.FechaInicial}" IsEnabled="{Binding !EstaCargando}"/>
+
+        <Label Text="Fecha final"/>
+        <DatePicker Date="{Binding Tarea.FechaInicial}" IsEnabled="{Binding !EstaCargando}"/>
+
+        <Button Text="Guardar" Command="{Binding GuardarCommand}" Margin="0,25,0,0"/>
+        <ActivityIndicator 
+            IsVisible="{Binding EstaCargando}" 
+            IsRunning="True"
+            AbsoluteLayout.LayoutBounds="0.5, 0.5"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+        />
+    </StackLayout>
+</ContentPage>

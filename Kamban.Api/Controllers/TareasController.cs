@@ -4,6 +4,7 @@ using Kamban.Application.Commands.Subtareas;
 using Kamban.Application.Commands.Tareas;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Kamban.Api.Controllers
 {
@@ -102,9 +103,9 @@ namespace Kamban.Api.Controllers
     public class EstadosController : ControllerBase
     {        
         [HttpGet()]
-        public  IActionResult ObtenerEstados(IMediator mediator)
+        public  async Task<IActionResult> ObtenerEstados(IMediator mediator)
         {
-            return Ok(mediator.Send(new GetEstadosCommand { }));
+            return Ok(await mediator.Send(new GetEstadosCommand { }));
         }
     }
 }
