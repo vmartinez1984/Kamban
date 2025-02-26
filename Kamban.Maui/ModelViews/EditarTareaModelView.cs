@@ -53,11 +53,23 @@ namespace Kamban.Maui.ModelViews
 
         private async Task GuardarAsync()
         {
-            EstaCargando = true;
-            await _kambanService.ActualizarTareaAsync(Tarea);
-            _ = _navigation.PopAsync();
-            _ = Toast.Make("Datos registrados").Show();
-            EstaCargando = false;
+            try
+            {
+                EstaCargando = true;
+                Tarea.Estado = EstadoSeleccionado.Nombre;
+                await _kambanService.ActualizarTareaAsync(Tarea);
+                _ = _navigation.PopAsync();
+                _ = Toast.Make("Datos registrados").Show();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                _ = Toast.Make("Valio pepino :(").Show();
+            }
+            finally
+            {
+                EstaCargando = false;
+            }
         }
 
         internal async Task ObtenerEstadosAsync()

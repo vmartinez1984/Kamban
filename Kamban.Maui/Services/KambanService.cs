@@ -79,6 +79,7 @@ namespace Kamban.Maui.Services
             //if (!string.IsNullOrEmpty(_configuracion.ObtenerToken()))
             //    request.Headers.Add("Authorization", $"Bearer {_configuracion.ObtenerToken()}");
             response = await httpClient.SendAsync(request);
+            var data2 = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
