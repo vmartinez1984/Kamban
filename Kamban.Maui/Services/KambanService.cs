@@ -11,7 +11,10 @@ namespace Kamban.Maui.Services
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _url;
 
-        //Inyectar HttpClient a través del constructor
+        /// <summary>
+        /// Inyectar HttpClient a través del constructor
+        /// </summary>
+        /// <param name="httpClientFactory"></param>
         public KambanService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -21,11 +24,11 @@ namespace Kamban.Maui.Services
         public async Task<List<ObtenerTareaCommandResponse>> ObtenerAsync()
         => await GetTAsync<List<ObtenerTareaCommandResponse>>(_url);
 
-        public async Task<List<GetEstadosCommandResponse>> ObtenerEstados()
+        public async Task<List<GetEstadosCommandResponse>> ObtenerEstadosAsync()
         => await GetTAsync<List<GetEstadosCommandResponse>>("Estados");
 
         public async Task<AgregarTareaCommandResponse> AgregarTareaAsync(AgregarTareaCommand tarea)
-            => await EnviarPorPostAsync<AgregarTareaCommandResponse>(tarea, _url);
+        => await EnviarPorPostAsync<AgregarTareaCommandResponse>(tarea, _url);
 
         private async Task<T> GetTAsync<T>(string url)
         {
@@ -64,5 +67,29 @@ namespace Kamban.Maui.Services
                 //return default;
                 throw new Exception($"StatusCode: {response.StatusCode}" + await response.Content.ReadAsStringAsync());
         }
+
+        protected async Task EnviarPorPutAsync(object data, string endpoint)
+        {
+            HttpRequestMessage request;
+            HttpResponseMessage response;
+
+            using HttpClient httpClient = _httpClientFactory.CreateClient();
+            request = new HttpRequestMessage(HttpMethod.Put, endpoint);
+            request.Content = new StringContent(JsonConvert.SerializeObject(data), null, "application/json");
+            //if (!string.IsNullOrEmpty(_configuracion.ObtenerToken()))
+            //    request.Headers.Add("Authorization", $"Bearer {_configuracion.ObtenerToken()}");
+            response = await httpClient.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                //return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            }
+            else
+                //return default;
+                throw new Exception($"StatusCode: {response.StatusCode}" + await response.Content.ReadAsStringAsync());
+        }
+
+        internal async Task ActualizarTareaAsync(ObtenerTareaCommandResponse tarea)
+        => await EnviarPorPutAsync(tarea, _url + tarea.Id);
     }
 }

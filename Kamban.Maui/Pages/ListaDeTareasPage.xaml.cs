@@ -5,7 +5,7 @@ namespace Kamban.Maui.Pages;
 
 public partial class ListaDeTareasPage : ContentPage
 {
-    private readonly ListaDeTareasModelView _listaDeTareasModelView;
+    private ListaDeTareasModelView _listaDeTareasModelView;
 
     public ListaDeTareasPage(KambanService kambanService)
     {

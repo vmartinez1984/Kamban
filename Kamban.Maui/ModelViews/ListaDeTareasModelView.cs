@@ -84,12 +84,12 @@ public class ListaDeTareasModelView : BaseModelView
 
     public ListaDeTareasModelView(INavigation navigation, KambanService kambanService)
     {
+        TareaSeleccionada = new ObtenerTareaCommandResponse();
         Navigation = navigation;
         _kambanService = kambanService;
         TareaSeleccionadaCommand = new Command(SeleccionarTarea);
         AgregarNuevaTareaCommand = new Command(NavegarAFormularioDeTarea);
         EstaCargando = false;
-        TareaSeleccionada = new ObtenerTareaCommandResponse();
     }
 
     private void NavegarAFormularioDeTarea(object obj)
@@ -100,7 +100,8 @@ public class ListaDeTareasModelView : BaseModelView
 
     private void SeleccionarTarea()
     {
-        //Navigation.PushAsync(new FormularioDeTareaPage());
+        if (TareaSeleccionada.Id != 0)
+            Navigation.PushAsync(new EditarTareaPage(TareaSeleccionada, _kambanService));
     }
 
     public async Task ObtenerTareasAsync()
@@ -108,7 +109,7 @@ public class ListaDeTareasModelView : BaseModelView
         try
         {
             EstaCargando = true;
-            var estados = await _kambanService.ObtenerEstados();
+            var estados = await _kambanService.ObtenerEstadosAsync();
             estados.Insert(0, new GetEstadosCommandResponse { Id = "0", Nombre = "Todos" });
             Estados = estados;
             EstadoSeleccionado = Estados[0];
@@ -119,7 +120,7 @@ public class ListaDeTareasModelView : BaseModelView
         }
         catch (Exception ex)
         {
-            Toast.Make("Valio pepino :( ");
+            _ = Toast.Make("Valio pepino :( ").Show();
         }
         finally
         {

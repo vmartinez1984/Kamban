@@ -14,8 +14,7 @@
                 <Picker 
                     ItemsSource="{Binding Estados}" 
                     SelectedItem="{Binding EstadoSeleccionado, Mode=TwoWay}" 
-                    ItemDisplayBinding="{Binding Nombre}"
-                    Grid.Row="1"
+                    ItemDisplayBinding="{Binding Nombre}"                    
                 />
                 <Button Text="Agregar tarea" Command="{Binding AgregarNuevaTareaCommand}" />
 
@@ -23,7 +22,7 @@
                     ItemsSource="{Binding TareasFiltradas}"                        
                     SelectionMode="Single"
                     SelectionChangedCommand ="{Binding TareaSeleccionadaCommand}" 
-                    SelectedItem="{Binding TareaSeleccionada, Mode=TwoWay}"              
+                    SelectedItem="{Binding TareaSeleccionada}"              
                     VerticalOptions="FillAndExpand"
                 >
                     <CollectionView.ItemTemplate>

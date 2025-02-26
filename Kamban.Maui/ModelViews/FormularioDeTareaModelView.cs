@@ -9,7 +9,7 @@ namespace Kamban.Maui.ModelViews
     {
         private AgregarTareaCommand tarea;
         private readonly INavigation _navigation;
-        private readonly KambanService _kambanService;        
+        private readonly KambanService _kambanService;
 
         public AgregarTareaCommand Tarea
         {
@@ -39,15 +39,15 @@ namespace Kamban.Maui.ModelViews
             Tarea.EncodedKey = Guid.NewGuid().ToString();
             _navigation = navigation;
             _kambanService = kambanService;
-            GuardarCommand = new Command(async () => await GuardarAsync());            
+            GuardarCommand = new Command(async () => await GuardarAsync());
         }
 
         private async Task GuardarAsync()
         {
             EstaCargando = true;
             await _kambanService.AgregarTareaAsync(Tarea);
-            _navigation.PopAsync();
-            Toast.Make("Datos registrados").Show();
+            _ = _navigation.PopAsync();
+            _ = Toast.Make("Datos registrados").Show();
             EstaCargando = false;
         }
     }
